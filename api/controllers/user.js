@@ -1,13 +1,19 @@
 import { db } from "../db.js";
+import util from "util"
 
-export const getUsers = (_, res) => {
+export const getUsers = async (_, res) => {
     const q = "SELECT * FROM reports";
   
-    db.query(q, (err, data) => {
-      if (err) return res.json(err);
-  
-      return res.status(200).json(data);
-    });
+    const query = util.promisify(db.query).bind(db);
+
+    try {
+      const responseData = await query(q);
+    
+      return res.status(200).json(responseData);
+      
+    }catch (err) {
+      return res.send(err)
+    }
   };
 
   export const addUser = (req, res) => {

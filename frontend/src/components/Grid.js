@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { toast } from "react-toastify";
 import reportPDF from "../Reports/Relatorio/report";
+import { domain } from "../domain";
 
 const Table = styled.table`
   width: 100%;
@@ -60,7 +61,7 @@ const Grid = ({ users, setUsers, setOnEdit }) => {
 
 const handleDelete = async (id) => {
     await axios
-      .delete("http://localhost:8800/" + id)
+      .delete(`http://${domain}:8800` + id)
       .then(({ data }) => {
         const newArray = users.filter((user) => user.id !== id);
 
@@ -76,10 +77,10 @@ const handleDelete = async (id) => {
     <Table>
       <Thead>
         <Tr>
-          <Th>Dia de Semana</Th>
-          <Th>Tempo</Th>
-          <Th>Descrição</Th>
-          <Th>Data</Th>                  
+          <Th>Wochentag</Th>
+          <Th>Stunden</Th>
+          <Th>Beschreibung</Th>
+          <Th>Datum</Th>                  
         </Tr>
       </Thead>   
       <Tbody>
@@ -100,7 +101,7 @@ const handleDelete = async (id) => {
         ))}
       </Tbody>   
     </Table>
-    <Button onClick={(e) => reportPDF(users)} type="button">Converter PDF</Button>
+    <Button onClick={(e) => reportPDF(users)} type="button">PDF Herunterladen</Button>
     </>
   );
 };

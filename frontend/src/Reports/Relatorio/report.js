@@ -29,10 +29,10 @@ function reportPDF(users){
                 widths: ['*', '*', '*', '*'],
                 body: [
                     [
-                        {text: 'Dia de Semana', style: 'tableHeader', fontSize: 10},
-                        {text: 'Duração', style: 'tableHeader', fontSize: 10},
-                        {text: 'Descrição', style: 'tableHeader', fontSize: 10},
-                        {text: 'Data', style: 'tableHeader', fontSize: 10}
+                        {text: 'Wochentag', style: 'tableHeader', fontSize: 10},
+                        {text: 'Stunden', style: 'tableHeader', fontSize: 10},
+                        {text: 'Beschreibung', style: 'tableHeader', fontSize: 10},
+                        {text: 'Datum', style: 'tableHeader', fontSize: 10}
                     ],
                     ...dados
                 ]
@@ -61,7 +61,7 @@ function reportPDF(users){
         footer: Rodape
     }
 
-    pdfMake.createPdf(docDefinitios).download('Relatório');
+    pdfMake.createPdf(docDefinitios).download('Wochenbericht');
 }
 
 export default reportPDF;

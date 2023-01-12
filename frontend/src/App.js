@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Form from "./components/Form.js";
 import Grid from "./components/Grid";
 import axios from "axios";
+import { domain } from "./domain";
 
 const Container = styled.div`
   width: 100%;
@@ -17,7 +18,8 @@ const Container = styled.div`
   gap: 10px;
 `;
 
-const Title = styled.h2``;
+const Title = styled.h1``;
+const Title1 = styled.h3``;
 
 function App() {
   const [users, setUsers] = useState([]);  
@@ -25,7 +27,7 @@ function App() {
 
   const getUsers = async () => {
     try {
-      const res = await axios.get("http://localhost:8800");
+      const res = await axios.get(`http://${domain}:8800`);
       setUsers(res.data.sort((a, b) => (a.dia > b.dia ? 1 : -1)));
     } catch (error) {
       toast.error(error);
@@ -39,9 +41,9 @@ function App() {
   return (
     <>
       <Container>
-      <Title>REGISTRO DE RELATÓRIOS</Title>
+      <Title>Xreports</Title>
       <Form onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers}/>
-      <Title>MEUS RELATÓRIOS</Title>
+      <Title1>Berichte</Title1>
       <Grid setOnEdit={setOnEdit} users={users} setUsers={setUsers}  />
       </Container>
       <ToastContainer autoClose={3000} position={toast.POSITION.BOTTOM_LEFT} />

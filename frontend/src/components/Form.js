@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { toast } from "react-toastify";
+import { domain } from "../domain";
 
 const FormContainer = styled.form`
   display: flex;
@@ -66,12 +67,12 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
         !user.data.value 
              
       ) {
-        return toast.warn("Preencha todos os campos!");
+        return toast.warn("Fühle Sie bitte alle Felder...");
       }
   
       if (onEdit) {
         await axios
-          .put("http://localhost:8800/" + onEdit.id, {
+          .put(`http://${domain}:8800` + onEdit.id, {
 
             dia: user.dia.value,
             tempo: user.tempo.value,
@@ -83,7 +84,7 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
           .catch(({ data }) => toast.error(data));
       } else {
         await axios
-          .post("http://localhost:8800", {
+          .post(`http://${domain}:8800`, {
 
             dia: user.dia.value,
             tempo: user.tempo.value,
@@ -107,23 +108,23 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
     return(
         <FormContainer ref={ref} onSubmit={handleSubmit}>
              <InputArea>
-                <Label>Dia de Semana</Label>                 
+                <Label>Wochentag</Label>                 
                 <Input name="dia"></Input>                                           
              </InputArea>
              <InputArea>
-                <Label>Tempo</Label>
+                <Label>Stunden</Label>
                 <Input name="tempo"></Input>             
              </InputArea>
              <InputArea>
-                <Label>Descrição</Label>
+                <Label>Beschreibung</Label>
                 <Input name="descricao"></Input>             
              </InputArea>
              <InputArea>
-                <Label>Data</Label>
+                <Label>Datum</Label>
                 <Input name="data" type="date"></Input>    
               </InputArea>         
              
-             <Button type="submit">ADICIONAR</Button>
+             <Button type="submit">Speichern</Button>
         </FormContainer>
     )
 }
